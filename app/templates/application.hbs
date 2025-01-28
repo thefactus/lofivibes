@@ -1,10 +1,15 @@
-{{page-title "Lofi"}}
+<div class="relative min-h-screen w-full">
+  <div
+    class="bg-cover bg-center bg-no-repeat min-h-screen w-full flex flex-col"
+    style="background-image: url('/images/cyberpunk1.jpeg');"
+  >
+    {{page-title "Lofi"}}
 
-{{outlet}}
+    <main class="flex-grow p-4 overflow-hidden">
+      {{outlet}}
+      <Player />
+    </main>
+  </div>
 
-{{! The following component displays Ember's default welcome message. }}
-{{! Feel free to remove this! }}
-
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+  <div class="rain-overlay"></div>
+</div>
