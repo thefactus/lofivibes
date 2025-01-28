@@ -1,1 +1,27 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+.rain-overlay {
+  /* Fill the parent container */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Prevent clicks on the overlay (so underlying elements are clickable) */
+  pointer-events: none;
+
+  /* Replace /images/rain.gif with your own rain animation */
+  background: url("/images/rain.gif") no-repeat center center;
+  background-size: cover;
+
+  /* Control how faint or strong the effect is */
+  opacity: 0.4;
+
+  /* You can adjust the stacking context to ensure it’s on top */
+  z-index: 10;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
