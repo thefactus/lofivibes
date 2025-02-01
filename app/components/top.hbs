@@ -1,0 +1,11 @@
+<div class="flex flex-col items-end">
+  <div class="z-20 flex space-x-2">
+    <button {{on "click" this.toggleNoiseDropdown}}>
+      <NoiseButton />
+    </button>
+    <PomodoroButton />
+  </div>
+  <div class="{{if this.showNoiseDropdown 'mt-2 z-20' 'hidden'}}" {{on "mouseleave" this.hideNoiseDropdown}}>
+    <NoiseDropdown />
+  </div>
+</div>

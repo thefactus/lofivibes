@@ -1,0 +1,27 @@
+<div class="mt-2 bg-stone-500/20 backdrop-blur-sm p-4 rounded-xl shadow-lg">
+  <div class="grid grid-cols-3 gap-2">
+    <button type="button"
+      class="p-2 rounded hover:bg-white/10 transition-colours cursor-pointer {{if this.noises.brown.active 'bg-white/20'}}"
+      {{on "click" (fn this.toggleNoise "brown")}}>
+      Brown
+    </button>
+    <button type="button"
+      class="p-2 rounded hover:bg-white/10 transition-colours cursor-pointer {{if this.noises.green.active 'bg-white/20'}}"
+      {{on "click" (fn this.toggleNoise "green")}}>
+      Green
+    </button>
+    <button type="button"
+      class="p-2 rounded hover:bg-white/10 transition-colours cursor-pointer {{if this.noises.white.active 'bg-white/20'}}"
+      {{on "click" (fn this.toggleNoise "white")}}>
+      White
+    </button>
+  </div>
+  <div class="mt-4 flex justify-center">
+    <VolumeControl
+      @volume={{this.volume}}
+      @isMuted={{this.isMuted}}
+      @onToggleMute={{this.toggleMute}}
+      @onVolumeChange={{this.updateVolume}}
+    />
+  </div>
+</div>
