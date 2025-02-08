@@ -2,10 +2,7 @@
 .rain-overlay {
   /* Fill the parent container */
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
 
   /* Prevent clicks on the overlay (so underlying elements are clickable) */
   pointer-events: none;
@@ -24,4 +21,11 @@
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.background-container {
+  background-image: url("/images/cyberpunk1.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

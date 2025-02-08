@@ -1,13 +1,8 @@
-// lofi/app/components/player.ts
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import songs from 'lofi/data/lofigirl-songs';
 
-/**
- * If this component doesn’t take any arguments,
- * use a type alias to avoid the "empty interface" ESLint warning.
- */
 type PlayerArgs = Record<string, never>;
 
 export default class PlayerComponent extends Component<PlayerArgs> {
@@ -21,7 +16,6 @@ export default class PlayerComponent extends Component<PlayerArgs> {
   private audioElement = new Audio();
   private baseUrl = 'https://lofigirl.com/wp-content/uploads/';
 
-  // Add a history stack to keep track of played songs
   @tracked history: number[] = [];
 
   constructor(owner: unknown, args: PlayerArgs) {
@@ -94,29 +88,17 @@ export default class PlayerComponent extends Component<PlayerArgs> {
       return;
     }
 
-    // Push the current index to history before changing
     if (this.previousIndex !== -1) {
-      // Reassign history to trigger reactivity
       this.history = [...this.history, this.previousIndex];
-      // Optional: Limit history size
-      // const maxHistory = 10;
-      // if (this.history.length > maxHistory) {
-      //   this.history = this.history.slice(-maxHistory);
-      // }
     }
 
     this.previousIndex = index;
-    // The `!` asserts we know there is a valid string at songs[index].
     const songPath = songs[index]!;
     this.currentSongName = this.formatSongName(songPath);
     this.audioElement.src = `${this.baseUrl}${songPath}`;
   }
 
-  /**
-   * Safely handle the possibility that `filename` might be undefined (though we used `!` above).
-   */
   private formatSongName(path: string): string {
-    // `.pop()` can be undefined, so fallback with `?? ''`
     const filename = path.split('/').pop() ?? '';
     return filename
       .replace(/^\d+-/, '')
@@ -128,7 +110,6 @@ export default class PlayerComponent extends Component<PlayerArgs> {
     return this.volume === 0;
   }
 
-  // New computed property to determine if "Previous" should be disabled
   get isPreviousDisabled(): boolean {
     return this.history.length === 0;
   }
@@ -163,15 +144,12 @@ export default class PlayerComponent extends Component<PlayerArgs> {
   @action
   async previousSong(): Promise<void> {
     if (this.history.length === 0) {
-      // Optionally, you can handle the case when there's no history
       console.log('No previous song in history.');
       return;
     }
 
-    // Create a copy of history and remove the last element
     const newHistory = [...this.history];
     const previousIndex = newHistory.pop()!;
-    // Reassign the updated history
     this.history = newHistory;
 
     this.previousIndex = previousIndex;
